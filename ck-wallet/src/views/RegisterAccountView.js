@@ -31,14 +31,14 @@ export default class RegisterAccountViewComponent extends React.Component {
         <Text style={{color: 'white', fontSize: 18, marginTop: 20}}> Register </Text>
         <Text style={{color: 'white', marginTop: 20}}> Register to create a CK account </Text>
         <TextInput
-          style={{marginTop: 25, height: 40, width: 275, backgroundColor: FORM_FIELD_BACKGROUND_COLOR, borderRadius: 5, color: DETAIL_TEXT_COLOR}}
+          style={{padding: 10, marginTop: 25, height: 40, width: 275, backgroundColor: FORM_FIELD_BACKGROUND_COLOR, borderRadius: 5, color: DETAIL_TEXT_COLOR}}
           placeholder="Enter Username"
           placeholderTextColor={DETAIL_TEXT_COLOR}
           onChangeText={(username) => {this.setState({username})}}
         />
 
         <TextInput
-        style={{marginTop: 15, height: 40, width: 275, backgroundColor: FORM_FIELD_BACKGROUND_COLOR, borderRadius: 5, color: DETAIL_TEXT_COLOR}}
+        style={{padding: 10, marginTop: 15, height: 40, width: 275, backgroundColor: FORM_FIELD_BACKGROUND_COLOR, borderRadius: 5, color: DETAIL_TEXT_COLOR}}
         placeholder="Enter Password"
         placeholderTextColor={DETAIL_TEXT_COLOR}
         onChangeText={(password) => {this.setState({password})}}
@@ -46,7 +46,7 @@ export default class RegisterAccountViewComponent extends React.Component {
       />
 
         <TextInput
-        style={{marginTop: 15, marginBottom: 40, height: 40, width: 275, backgroundColor: FORM_FIELD_BACKGROUND_COLOR, borderRadius: 5, color: DETAIL_TEXT_COLOR}}
+        style={{padding: 10, marginTop: 15, marginBottom: 40, height: 40, width: 275, backgroundColor: FORM_FIELD_BACKGROUND_COLOR, borderRadius: 5, color: DETAIL_TEXT_COLOR}}
         placeholder="Confirm password"
         placeholderTextColor={DETAIL_TEXT_COLOR}
         onChangeText={(confirmPassword) => {this.setState({confirmPassword})}}

@@ -8,9 +8,11 @@ import WalletRestApi from '../api/WalletRestApi';
 export default class SendTransactionComponent extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { user_id: "",token: "", receivingAddress: '', coinAmount: '0.00'};
+    this.state = {keys: [], user_id: "",token: "", receivingAddress: '', coinAmount: '0.00'};
     AsyncStorage.getItem('token').then((value) => this.setState({token: value}));
     AsyncStorage.getItem('user_id').then((value) => this.setState({user_id: value}));
+    AsyncStorage.getItem('keys').then((value) => this.setState({keys: JSON.parse(value)}));
+    //console.log(this.state.keys);
   }
 
   handleAddressChange() {
@@ -55,14 +57,7 @@ export default class SendTransactionComponent extends React.Component {
           <Text style={{margin: 10, color: 'white'}}> You are sending {this.state.coinAmount} K320 from your Wallet. </Text>
           <ButtonWithActionComponent
             text={"Send"}
-            onPressHandler={() => {
-              var token, user_id;
-              console.log(this.state.token)
-              const api = new WalletRestApi(this.state.token);
-
-            api.makeKey(this.state.user_id)
-            .then(response => console.log(response))
-            .catch(err => console.log(err));}}
+            onPressHandler={() => {}}
             source={require("../assets/right_arrow_3.png")}
           />
         </View>

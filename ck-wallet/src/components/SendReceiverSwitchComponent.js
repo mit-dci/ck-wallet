@@ -17,7 +17,7 @@ export default class SendReceiverSwitchComponent extends React.Component {
           </Text>
         </TouchableHighlight>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center',backgroundColor: APP_BACKGROUND_COLOR}}>
-          <TouchableHighlight underlayColor={"transparent"} style={{flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: APP_BACKGROUND_COLOR}}onPress={this.props.onPressReceiveHandler}>
+          <TouchableHighlight underlayColor={"transparent"} style={{flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: APP_BACKGROUND_COLOR}} onPress={this.props.onPressReceiveHandler}>
             <Text style={{color: BUTTON_BACKGROUND_COLOR}}>
               Receive
             </Text>

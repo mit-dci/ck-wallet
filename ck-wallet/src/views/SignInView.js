@@ -9,17 +9,19 @@ export default class SignInViewComponent extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {token:"", user_id:"",text: "", passwordText: ""};
+    this.state = {token:"", user_id:"",text: "", passwordText: "", balance: 0};
   }
 
   signInHandler() {
     const api = new WalletRestApi();
+    var user_id;
 
     api.login(this.state.text, this.state.passwordText)
-    .then(response => { console.log(response);
+    .then(response => {
       if(response.success) {
         AsyncStorage.setItem("token", response.token);
         AsyncStorage.setItem("user_id", response.user_id);
+        this.retrieveKeys(response.user_id, response.token);
         this.props.navigation.navigate("Main");
       }
     })
@@ -27,7 +29,41 @@ export default class SignInViewComponent extends React.Component {
 
   }
 
+  retrieveKeys(user_id, token) {
+    const api = new WalletRestApi(token);
+    api.getKeys(user_id)
+    .then(response => {
+      var publickeys = [];
+      const keys = response.keys;
+      for (var counter=0; counter < keys.length; counter++) {
+        publickeys[counter] = keys[counter].publicKey;
+      }
+      AsyncStorage.setItem("keys", JSON.stringify(publickeys));
+      this.getBalance(publickeys, token, api);
+    })
+    .then(response => response)
+    .catch(err => console.log(err));
+  }
 
+  getBalance(publickeys, token, api) {
+      var outputs = [];
+      var balance = 0;
+      for(var j=0; j < publickeys.length; j++) {
+        api.getTxos(publickeys[j])
+        .then(response => {
+          for(output = 0; output < response.txos.length; output++) {
+              var txo = response.txos[output];
+              outputs.push(txo);
+              if(txo.spent == false) {
+                balance += txo.value;
+            }
+          }
+          AsyncStorage.setItem("balance", JSON.stringify(parseFloat(balance / 100000000.0)));
+          AsyncStorage.setItem("outputs", JSON.stringify(outputs));
+        })
+        .catch(err => console.log(err));
+      }
+  }
 
   render() {
     return (
@@ -44,12 +80,12 @@ export default class SignInViewComponent extends React.Component {
         />
 
         <TextInput
-        style={{padding: 10, marginTop: 15, marginBottom: 4, height: 40, width: 275, backgroundColor: FORM_FIELD_BACKGROUND_COLOR, borderRadius: 5, color: DETAIL_TEXT_COLOR}}
-        onChangeText={(passwordText) => this.setState({passwordText: passwordText})}
-        keyboardType="numbers-and-punctuation"
-        secureTextEntry
-        placeholder="Your Password"
-        placeholderTextColor={DETAIL_TEXT_COLOR}
+          style={{padding: 10, marginTop: 15, marginBottom: 4, height: 40, width: 275, backgroundColor: FORM_FIELD_BACKGROUND_COLOR, borderRadius: 5, color: DETAIL_TEXT_COLOR}}
+          onChangeText={(passwordText) => this.setState({passwordText: passwordText})}
+          keyboardType="numbers-and-punctuation"
+          secureTextEntry
+          placeholder="Your Password"
+          placeholderTextColor={DETAIL_TEXT_COLOR}
         />
 
         <View style={styles.forgotPasswordContainer}>

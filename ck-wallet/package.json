@@ -21,6 +21,7 @@
     "preset": "jest-expo"
   },
   "dependencies": {
+    "@ercpereda/react-native-accordion": "^2.0.6",
     "crypto-js": "^3.1.9-1",
     "eslint-plugin-react-native": "^3.2.1",
     "expo": "^27.0.1",

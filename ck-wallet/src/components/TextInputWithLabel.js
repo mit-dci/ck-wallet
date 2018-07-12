@@ -17,6 +17,7 @@ export default class TextInputWithLabelComponent extends React.Component {
         placeholder={this.props.placeholder}
         placeholderTextColor={DETAIL_TEXT_COLOR}
         onChangeText={(text) => {this.props.update(text);}}
+        keyboardType={"numeric"}
         value={this.state.text}>
       </TextInput>
       <View style={styles.textContainer}>
@@ -42,6 +43,7 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 2,
     borderBottomLeftRadius: 2,
     padding: 10,
+    fontWeight: 'normal',
   },
   textContainer: {
     flexDirection: 'column',
@@ -54,5 +56,6 @@ const styles = StyleSheet.create({
   },
   text: {
     color: 'white',
+
   }
 });

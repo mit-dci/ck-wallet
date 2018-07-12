@@ -33,7 +33,7 @@ export default class SignInViewComponent extends React.Component {
     const api = new WalletRestApi(token);
     api.getKeys(user_id)
     .then(response => {
-
+      AsyncStorage.setItem("labelAndKeys", JSON.stringify(response.keys));
       var publickeys = [];
       const keys = response.keys;
       for (var counter=0; counter < keys.length; counter++) {

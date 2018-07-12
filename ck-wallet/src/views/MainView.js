@@ -6,22 +6,33 @@ import SendReceiverSwitchComponent from '../components/SendReceiverSwitchCompone
 import SendTransactionComponent from '../components/SendTransactionComponent';
 import BalanceHeaderComponent from '../components/BalanceHeaderComponent';
 import TransactionsDisplayComponent from '../components/TransactionsDisplayComponent';
+import QRCodeComponent from '../components/qrCodeComponent';
 
 
 export default class MainView extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { keys: [], user_id: "", token: "", receivingAddress: '', coinAmount: '0.00' };
+    this.state = { keys: [], user_id: "", token: "", receivingAddress: '', coinAmount: '0.00', showTransactionsView: true };
   }
-  sendHandler() {
-    console.log("Send Money");
+  sendHandler = () => {
+    this.setState({ showTransactionsView: true });
   }
-  receiveHandler() {
-    console.log("Receive Money");
+  receiveHandler = () => {
+    this.setState({ showTransactionsView: false });
   }
 
   render() {
+
+    const transactionsComponent = (<View style={styles.alternatingContainer}>
+      <SendTransactionComponent />
+      <TransactionsDisplayComponent />
+    </View>);
+
+    const qrCodeComponent = (<QRCodeComponent />);
+
+    const alternatingComponent = this.state.showTransactionsView ?
+    transactionsComponent : qrCodeComponent;
 
     return (
       <View style={styles.container}>
@@ -31,8 +42,7 @@ export default class MainView extends React.Component {
         <View>
           <SendReceiverSwitchComponent onPressSendHandler={this.sendHandler} onPressReceiveHandler={this.receiveHandler}/>
         </View>
-        <SendTransactionComponent />
-        <TransactionsDisplayComponent />
+        { alternatingComponent }
       </View>
     );
   }
@@ -51,5 +61,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-end',
     width: Dimensions.get('window').width,
+  },
+  alternatingContainer: {
+    flex: 1,
+    alignItems: 'center',
   }
 });

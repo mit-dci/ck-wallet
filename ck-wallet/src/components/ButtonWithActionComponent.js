@@ -5,7 +5,7 @@ import { BUTTON_BACKGROUND_COLOR } from '../constants/styles.js';
 export default class ButtonWithActionComponent extends React.Component {
   render() {
     return (
-      <TouchableHighlight onPress={this.props.onPressHandler}>
+      <TouchableHighlight underlayColor={"transparent"} onPress={this.props.onPressHandler}>
         <View style={styles.container}>
           <View style={styles.textContainer}>
             <Text style={styles.textStyle}> {this.props.text} </Text>
@@ -29,9 +29,7 @@ const styles = StyleSheet.create({
     borderRadius: 3,
     justifyContent: 'center',
     alignItems: 'center',
-    shadowOffset: { width: 3, height: 3 },
-    shadowColor: 'black',
-    shadowOpacity: 1.0,
+    marginBottom: 5,
   },
   textContainer: {
     flex: 1,

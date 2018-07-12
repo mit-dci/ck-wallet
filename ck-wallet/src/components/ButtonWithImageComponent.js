@@ -10,7 +10,7 @@ export default class ButtonWithImageComponent extends React.Component {
 
   render() {
     return(<View>
-      <TouchableHighlight onPress={this.props.onPressHandler}>
+      <TouchableHighlight underlayColor={"transparent"} onPress={this.props.onPressHandler}>
         <View style={styles.container}>
           <Image
             style={{width: this.props.width, height: this.props.height}}

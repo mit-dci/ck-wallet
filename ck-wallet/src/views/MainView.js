@@ -5,12 +5,14 @@ import ButtonWithActionComponent from '../components/ButtonWithActionComponent';
 import SendReceiverSwitchComponent from '../components/SendReceiverSwitchComponent';
 import SendTransactionComponent from '../components/SendTransactionComponent';
 import BalanceHeaderComponent from '../components/BalanceHeaderComponent';
+import TransactionsDisplayComponent from '../components/TransactionsDisplayComponent';
+
 
 export default class MainView extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {keys: [], user_id: "", token: "", receivingAddress: '', coinAmount: '0.00'};
+    this.state = { keys: [], user_id: "", token: "", receivingAddress: '', coinAmount: '0.00' };
   }
   sendHandler() {
     console.log("Send Money");
@@ -22,7 +24,6 @@ export default class MainView extends React.Component {
   render() {
 
     return (
-
       <View style={styles.container}>
         <View style={styles.balanceHeaderContainer}>
           <BalanceHeaderComponent />
@@ -31,6 +32,7 @@ export default class MainView extends React.Component {
           <SendReceiverSwitchComponent onPressSendHandler={this.sendHandler} onPressReceiveHandler={this.receiveHandler}/>
         </View>
         <SendTransactionComponent />
+        <TransactionsDisplayComponent />
       </View>
     );
   }

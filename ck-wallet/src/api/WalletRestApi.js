@@ -1,9 +1,10 @@
 import RestClient from 'react-native-rest-client';
 var CryptoJS = require('crypto-js');
 
+
 export default class WalletRestApi extends RestClient {
   constructor(authToken) {
-    super('http://35.185.49.128:8080', {
+    super('http://35.196.65.240:8080', {
       headers: {
         'x-access-token': authToken,
       },
@@ -25,6 +26,10 @@ export default class WalletRestApi extends RestClient {
 
   getTxos(publicKey) {
     return this.POST('/api/blockchain/txos', {"pubkey": publicKey});
+  }
+
+  getTransaction(id) {
+    return this.POST('/api/blockchain/util/gettransaction', {"id": id});
   }
 
 }

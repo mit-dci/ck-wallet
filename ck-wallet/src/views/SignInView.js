@@ -9,7 +9,7 @@ export default class SignInViewComponent extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {token:"", user_id:"",text: "", passwordText: "", balance: 0};
+    this.state = {token:"", user_id:"", text: "", passwordText: "", balance: 0};
   }
 
   signInHandler() {
@@ -33,6 +33,7 @@ export default class SignInViewComponent extends React.Component {
     const api = new WalletRestApi(token);
     api.getKeys(user_id)
     .then(response => {
+
       var publickeys = [];
       const keys = response.keys;
       for (var counter=0; counter < keys.length; counter++) {
@@ -45,19 +46,25 @@ export default class SignInViewComponent extends React.Component {
     .catch(err => console.log(err));
   }
 
-  getBalance(publickeys, token, api) {
+  async getBalance(publickeys, token, api) {
       var outputs = [];
       var balance = 0;
       for(var j=0; j < publickeys.length; j++) {
         api.getTxos(publickeys[j])
         .then(response => {
-          for(output = 0; output < response.txos.length; output++) {
-              var txo = response.txos[output];
-              outputs.push(txo);
-              if(txo.spent == false) {
-                balance += txo.value;
+          //console.log(response);
+          if(response.txos === null) {
+            //do nothing
+          } else {
+            for(output = 0; output < response.txos.length; output++) {
+                var txo = response.txos[output];
+                outputs.push(txo);
+                if(txo.spent == false) {
+                  balance += txo.value;
+              }
             }
           }
+
           AsyncStorage.setItem("balance", JSON.stringify(parseFloat(balance / 100000000.0)));
           AsyncStorage.setItem("outputs", JSON.stringify(outputs));
         })

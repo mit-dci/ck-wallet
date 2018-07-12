@@ -7,7 +7,6 @@ import {RED_COLOR, APP_BACKGROUND_COLOR, FORM_FIELD_BACKGROUND_COLOR, BUTTON_BAC
 export default class SlidingDrawerComponent extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {transactionValue: "+ 3.560"}
   }
 
   render() {

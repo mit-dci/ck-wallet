@@ -14,7 +14,8 @@ export default class BalanceHeaderComponent extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={{color: 'white', }}> Balance: {this.state.balance} K320 </Text>
+        <Text style={{color: 'white', }}> {this.state.balance} </Text>
+        <Text style={{color: 'white'}}> K320 </Text>
       </View>
     );
   }
@@ -24,7 +25,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 0,
     backgroundColor: APP_BACKGROUND_COLOR,
-    alignItems: 'center',
+    flexDirection: 'column',
+    alignItems: 'flex-end',
     margin: 10,
   },
 });

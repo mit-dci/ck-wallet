@@ -1,8 +1,12 @@
 import React from 'react';
-import { StyleSheet, Text, TextInput, View, Dimensions, AsyncStorage } from 'react-native';
+import { StyleSheet, Text, TextInput, View, Dimensions, AsyncStorage, StatusBar,
+Image} from 'react-native';
 import ButtonWithActionComponent from '../components/ButtonWithActionComponent';
-import { APP_BACKGROUND_COLOR, DETAIL_TEXT_COLOR, FORM_FIELD_BACKGROUND_COLOR } from '../constants/styles.js';
+import { APP_BACKGROUND_COLOR,
+  DETAIL_TEXT_COLOR,
+  FORM_FIELD_BACKGROUND_COLOR } from '../constants/styles.js';
 import WalletRestApi from '../api/WalletRestApi';
+import {onSignIn} from '../helpers/auth';
 var CryptoJS = require("crypto-js");
 
 export default class SignInViewComponent extends React.Component {
@@ -22,7 +26,7 @@ export default class SignInViewComponent extends React.Component {
         AsyncStorage.setItem("token", response.token);
         AsyncStorage.setItem("user_id", response.user_id);
         this.retrieveKeys(response.user_id, response.token);
-        this.props.navigation.navigate("Main");
+        onSignIn().then(() => this.props.navigation.navigate("Main"));
       }
     })
     .catch(err => console.log(err));
@@ -75,10 +79,17 @@ export default class SignInViewComponent extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.headerStyle}> Sign In </Text>
-        <Text style={styles.descriptionStyle}> Sign In to your K320 account </Text>
+        <StatusBar
+          barStyle="light-content"
+          backgroundColor="#6a51ae"
+        />
+        <Image style={styles.headerStyle} defaultSource={require('../assets/cryptokernel_1_trnsprntbg.png')} />
+        <Text style={styles.descriptionStyle}> Sign in to your Cryptokernel account </Text>
         <TextInput
-          style={{padding: 10, marginTop: 25, height: 40, width: 275, backgroundColor: FORM_FIELD_BACKGROUND_COLOR, borderRadius: 5, color: DETAIL_TEXT_COLOR}}
+          style={{padding: 10, marginTop: 25, height: 40, width: 275,
+            backgroundColor: FORM_FIELD_BACKGROUND_COLOR,
+            borderRadius: 5,
+            color: DETAIL_TEXT_COLOR}}
           onChangeText={(text) => {this.setState({text}); }}
           value={this.state.text}
           keyboardType="numbers-and-punctuation"
@@ -87,7 +98,10 @@ export default class SignInViewComponent extends React.Component {
         />
 
         <TextInput
-          style={{padding: 10, marginTop: 15, marginBottom: 4, height: 40, width: 275, backgroundColor: FORM_FIELD_BACKGROUND_COLOR, borderRadius: 5, color: DETAIL_TEXT_COLOR}}
+          style={{padding: 10, marginTop: 15,
+             marginBottom: 4, height: 40, width: 275,
+             backgroundColor: FORM_FIELD_BACKGROUND_COLOR,
+            borderRadius: 5, color: DETAIL_TEXT_COLOR}}
           onChangeText={(passwordText) => this.setState({passwordText: passwordText})}
           keyboardType="numbers-and-punctuation"
           secureTextEntry
@@ -101,11 +115,9 @@ export default class SignInViewComponent extends React.Component {
 
         <ButtonWithActionComponent onPressHandler={() => { this.signInHandler()}} text="Sign In" source={require('../assets/right_arrow_3.png')}/>
 
-        <View style={{marginTop: 50}}>
-          <Text style={{color: DETAIL_TEXT_COLOR}}> Don't have an account?
-           <Text> </Text>
-           <Text onPress={() => this.props.navigation.navigate('Register')} style={styles.registerAcccountTextStyle}> Register </Text>
-          </Text>
+        <View style={{marginTop: 50, flexDirection: 'row'}} >
+          <Text style={{color: DETAIL_TEXT_COLOR}}> Don't have an account? </Text>
+          <Text onPress={() => this.props.navigation.navigate('Register')} style={styles.registerAcccountTextStyle}> Register </Text>
         </View>
       </View>
     );
@@ -114,7 +126,7 @@ export default class SignInViewComponent extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 0,
     flexDirection: 'column',
     height: Dimensions.get('window').height,
     width: Dimensions.get('window').width,
@@ -123,9 +135,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   headerStyle: {
-    color: 'white',
-    fontSize: 18,
-    marginTop: 20
+    width: 150,
+    height: 150,
+    resizeMode: 'contain',
   },
   forgotPasswordContainer: {
     flex: 0,

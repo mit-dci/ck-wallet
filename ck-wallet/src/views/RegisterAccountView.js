@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Dimensions, Image } from 'react-native';
 import ButtonWithActionComponent from '../components/ButtonWithActionComponent'
 import { APP_BACKGROUND_COLOR, FORM_FIELD_BACKGROUND_COLOR, DETAIL_TEXT_COLOR } from '../constants/styles.js'
 import WalletRestApi from '../api/WalletRestApi';
@@ -28,17 +28,17 @@ export default class RegisterAccountViewComponent extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={{color: 'white', fontSize: 18, marginTop: 20}}> Register </Text>
+        <Image style={styles.headerStyle} source={require('../assets/cryptokernel_1_trnsprntbg.png')} />
         <Text style={{color: 'white', marginTop: 20}}> Register to create a CK account </Text>
         <TextInput
-          style={{padding: 10, marginTop: 25, height: 40, width: 275, backgroundColor: FORM_FIELD_BACKGROUND_COLOR, borderRadius: 5, color: DETAIL_TEXT_COLOR}}
+          style={{padding: 10, marginTop: 25, height: 40, width: 275, backgroundColor: 'white', borderRadius: 5, color: DETAIL_TEXT_COLOR}}
           placeholder="Enter Username"
           placeholderTextColor={DETAIL_TEXT_COLOR}
           onChangeText={(username) => {this.setState({username})}}
         />
 
         <TextInput
-        style={{padding: 10, marginTop: 15, height: 40, width: 275, backgroundColor: FORM_FIELD_BACKGROUND_COLOR, borderRadius: 5, color: DETAIL_TEXT_COLOR}}
+        style={{padding: 10, marginTop: 15, height: 40, width: 275, backgroundColor: 'white', borderRadius: 5, color: DETAIL_TEXT_COLOR}}
         placeholder="Enter Password"
         placeholderTextColor={DETAIL_TEXT_COLOR}
         onChangeText={(password) => {this.setState({password})}}
@@ -46,7 +46,7 @@ export default class RegisterAccountViewComponent extends React.Component {
       />
 
         <TextInput
-        style={{padding: 10, marginTop: 15, marginBottom: 40, height: 40, width: 275, backgroundColor: FORM_FIELD_BACKGROUND_COLOR, borderRadius: 5, color: DETAIL_TEXT_COLOR}}
+        style={{padding: 10, marginTop: 15, marginBottom: 40, height: 40, width: 275, backgroundColor: 'white', borderRadius: 5, color: DETAIL_TEXT_COLOR}}
         placeholder="Confirm password"
         placeholderTextColor={DETAIL_TEXT_COLOR}
         onChangeText={(confirmPassword) => {this.setState({confirmPassword})}}
@@ -67,5 +67,9 @@ const styles = StyleSheet.create({
     backgroundColor: APP_BACKGROUND_COLOR,
     alignItems: 'center',
     justifyContent: 'center',
+  }, headerStyle: {
+      width: 150,
+      height: 150,
+      resizeMode: 'contain',
   },
 });

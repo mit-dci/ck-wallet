@@ -11,7 +11,9 @@ export default class ButtonWithActionComponent extends React.Component {
             <Text style={styles.textStyle}> {this.props.text} </Text>
           </View>
           <View style={styles.imageContainer}>
-            <Image style={styles.imageStyle} source={this.props.source} />
+            <Image style={styles.imageStyle}
+              resizeMethod={"resize"}
+              defaultSource={this.props.source} />
           </View>
         </View>
       </TouchableHighlight>

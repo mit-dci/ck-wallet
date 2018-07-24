@@ -9,7 +9,7 @@ export default class TextInputWithDetailComponent extends React.Component {
     return (
     <View style={styles.container}>
       <View style={styles.labelViewStyle}>
-        <Text style={{color: 'white'}} textAlign={'center'}> {this.props.label} </Text>
+        <Text style={{color: 'white'}} numberOfLines={1} textAlign={'center'}> {this.props.label} </Text>
       </View>
       <ButtonWithImageComponent
         width={45}
@@ -32,7 +32,6 @@ const styles = StyleSheet.create({
     labelViewStyle: {
     flex: 0,
     backgroundColor: FORM_FIELD_BACKGROUND_COLOR,
-    color: 'white',
     width: 288,
     height: 46,
     borderTopLeftRadius: 2,

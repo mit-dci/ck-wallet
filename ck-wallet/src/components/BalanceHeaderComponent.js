@@ -23,10 +23,10 @@ export default class BalanceHeaderComponent extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 0,
+    flex: 1,
     backgroundColor: APP_BACKGROUND_COLOR,
     flexDirection: 'column',
     alignItems: 'flex-end',
-    margin: 10,
+    marginBottom: 0,
   },
 });

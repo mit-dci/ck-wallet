@@ -1,11 +1,12 @@
 import React from 'react';
 import {StyleSheet, View, Text, TextInput, TouchableHighlight, Image} from 'react-native';
-import {BUTTON_BACKGROUND_COLOR} from "../constants/styles.js";
+import { BUTTON_BACKGROUND_COLOR } from "../constants/styles.js";
 
 export default class ButtonWithImageComponent extends React.Component {
 
   constructor(props) {
     super(props);
+
   }
 
   render() {
@@ -14,7 +15,8 @@ export default class ButtonWithImageComponent extends React.Component {
         <View style={styles.container}>
           <Image
             style={{width: this.props.width, height: this.props.height}}
-            source={this.props.source}>
+            resizeMethod={"resize"}
+            defaultSource={this.props.source}>
           </Image>
         </View>
       </TouchableHighlight>

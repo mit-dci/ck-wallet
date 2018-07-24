@@ -11,36 +11,40 @@ export default class SlidingDrawerComponent extends React.Component {
 
   render() {
    const Header = ({ isOpen }) =>(
-      <View style={{
-          flexDirection: 'row',
-          paddingTop: 15,
-          paddingRight: 15,
-          paddingLeft: 15,
-          paddingBottom: 15,
-          borderBottomWidth: 0.5  ,
-          borderBottomColor: '#a9a9a9',
-          backgroundColor: APP_BACKGROUND_COLOR,
-          width: Dimensions.get('window').width,
-          height: 55,
-        }}>
-      <View style={{flex: 1, flexDirection: 'row', alignItems: 'center',}}>
-        <View style={{flex: 0.5}}>
-          <Text style={{fontWeight: 'bold', fontSize: 16, color: this.props.isSpent ? RED_COLOR : BUTTON_BACKGROUND_COLOR,}}> {`${this.props.isSpent ? 'SENT' : 'RECEIVED'}`}</Text>
-        </View>
+    <View
+      style={{ flexDirection: 'column',
+               }}>
+          <View style={{
+              flexDirection: 'row',
+              paddingTop: 15,
+              paddingRight: 15,
+              paddingLeft: 15,
+              paddingBottom: 15,
+              borderBottomWidth: 0.5,
+              borderBottomColor: 'silver',
+              backgroundColor: APP_BACKGROUND_COLOR,
+              width: Dimensions.get('window').width,
+              height: 55,
+            }}>
+          <View style={{flex: 1, flexDirection: 'row', alignItems: 'center',}}>
+            <View style={{flex: 0.5}}>
+              <Text style={{fontWeight: 'bold', fontSize: 16, color: this.props.isSpent ? RED_COLOR : BUTTON_BACKGROUND_COLOR,}}> {`${this.props.isSpent ? 'SENT' : 'RECEIVED'}`}</Text>
+            </View>
 
-        <View style={{flex: 0.5, flexDirection: 'column', justifyContent: 'flex-start', }}>
-          <Text style={{fontSize: 16, color: DETAIL_TEXT_COLOR, textAlign: 'center'}}> {this.props.month} </Text>
-          <Text style={{fontSize: 16, color: DETAIL_TEXT_COLOR, textAlign: 'center'}}> {this.props.day} </Text>
-        </View>
-      </View>
-
-
-      <View style={{flex: 1, flexDirection: 'row', justifyContent: 'flex-end',}}>
-        <Text style={{fontWeight: 'bold', fontSize: 16, color: 'white', }}>  {`${this.props.isSpent ? '-' : '+'}`} {this.props.outputValue} </Text>
-      </View>
+            <View style={{flex: 0.5, flexDirection: 'column', justifyContent: 'flex-start', }}>
+              <Text style={{fontSize: 16, color: DETAIL_TEXT_COLOR, textAlign: 'center'}}> {this.props.month} </Text>
+              <Text style={{fontSize: 16, color: DETAIL_TEXT_COLOR, textAlign: 'center'}}> {this.props.day} </Text>
+            </View>
+          </View>
 
 
-    </View>);
+          <View style={{flex: 1, flexDirection: 'row', justifyContent: 'flex-end',}}>
+            <Text style={{fontWeight: 'bold', fontSize: 16, color: 'white', }}>  {`${this.props.isSpent ? '-' : '+'}`} {this.props.outputValue} </Text>
+          </View>
+
+         </View>
+
+       </View>);
 
         const Content = (
           <View style={{

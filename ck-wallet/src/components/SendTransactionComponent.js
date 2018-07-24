@@ -4,6 +4,7 @@ import TextInputWithDetailComponent from './TextInputWithDetailComponent';
 import TextInputWithLabelComponent from './TextInputWithLabel';
 import ButtonWithActionComponent from './ButtonWithActionComponent';
 import WalletRestApi from '../api/WalletRestApi';
+import {onSignOut} from '../helpers/auth.js';
 
 export default class SendTransactionComponent extends React.Component {
   constructor(props) {
@@ -12,15 +13,14 @@ export default class SendTransactionComponent extends React.Component {
     AsyncStorage.getItem('token').then((value) => this.setState({token: value}));
     AsyncStorage.getItem('user_id').then((value) => this.setState({user_id: value}));
     AsyncStorage.getItem('keys').then((value) => this.setState({keys: JSON.parse(value)}));
-    //console.log(this.state.keys);
   }
 
   handleAddressChange() {
-
+    //yet to be implemented.
   }
 
   handleCoinAmountChange() {
-
+  //yet to be implemented.
   }
 
   updateReceivingAddress = (value)  => {
@@ -42,7 +42,7 @@ export default class SendTransactionComponent extends React.Component {
           <TextInputWithDetailComponent
             placeholder="Receiving Address"
             buttonImageSource={require('../assets/qrcode1.png')}
-            onPressHandler={() => {console.log("Receiving address")}}
+            onPressHandler={this.props.onPressBarHandler}
             update={val => this.updateReceivingAddress(val)}
           />
         </View>
@@ -57,7 +57,6 @@ export default class SendTransactionComponent extends React.Component {
           <Text style={{margin: 10, color: 'white'}}> You are sending {this.state.coinAmount} K320 from your Wallet. </Text>
           <ButtonWithActionComponent
             text={"Send"}
-            onPressHandler={() => {}}
             source={require("../assets/right_arrow_3.png")}
           />
         </View>

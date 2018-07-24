@@ -11,18 +11,34 @@ export default class SendReceiverSwitchComponent extends React.Component {
   render() {
     return(
       <View style={styles.container}>
-        <TouchableHighlight underlayColor={"transparent"} style={{flex: 1, height: 25, justifyContent: 'center', alignItems: 'center', backgroundColor: BUTTON_BACKGROUND_COLOR}} onPress={this.props.onPressSendHandler}>
-          <Text style={{color: 'white'}}>
+        <TouchableHighlight underlayColor={"transparent"} style={{
+          flex: 1,
+          height: 25,
+          justifyContent: 'center',
+          alignItems: 'center',
+          borderColor: BUTTON_BACKGROUND_COLOR,
+          borderWidth: 2,
+          borderRadius: 1,
+          backgroundColor: this.props.showTransactionsView ? BUTTON_BACKGROUND_COLOR : APP_BACKGROUND_COLOR }}
+          onPress={this.props.onPressSendHandler}>
+          <Text style={{color: this.props.showTransactionsView ? 'white' : BUTTON_BACKGROUND_COLOR}}>
             Send
           </Text>
         </TouchableHighlight>
-        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center',backgroundColor: APP_BACKGROUND_COLOR}}>
-          <TouchableHighlight underlayColor={"transparent"} style={{flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: APP_BACKGROUND_COLOR}} onPress={this.props.onPressReceiveHandler}>
-            <Text style={{color: BUTTON_BACKGROUND_COLOR}}>
+        <TouchableHighlight underlayColor={"transparent"} style={{
+            flex: 1,
+            height: 25,
+            justifyContent: 'center',
+            alignItems: 'center',
+            borderColor: BUTTON_BACKGROUND_COLOR,
+            borderWidth: 2,
+            borderRadius: 1,
+            backgroundColor: this.props.showTransactionsView ? APP_BACKGROUND_COLOR : BUTTON_BACKGROUND_COLOR}}
+             onPress={this.props.onPressReceiveHandler}>
+            <Text style={{color: this.props.showTransactionsView ? BUTTON_BACKGROUND_COLOR : 'white'}}>
               Receive
             </Text>
           </TouchableHighlight>
-        </View>
     </View>);
   }
 }
@@ -36,9 +52,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderColor: BUTTON_BACKGROUND_COLOR,
-    borderWidth: 1,
-    borderRadius: 1,
-    marginBottom: 5,
+    marginTop: 20,
+    // borderWidth: 3,
+    // borderRadius: 1,
+    // marginBottom: 5,
   },
   sendContainer: {
     flex: 1,
@@ -46,7 +63,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 5,
-    backgroundColor: BUTTON_BACKGROUND_COLOR,
   },
   receiveContainer: {
     flex: 1,

@@ -4,22 +4,25 @@ import ButtonWithImageComponent from './ButtonWithImageComponent';
 import SlidingDrawerComponent from './SlidingDrawerComponent';
 import {APP_BACKGROUND_COLOR,FORM_FIELD_BACKGROUND_COLOR,DETAIL_TEXT_COLOR} from '../constants/styles.js';
 import WalletRestApi from '../api/WalletRestApi';
+import { Camera, Permissions } from 'expo';
 
 export default class TransactionsDisplayComponent extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {text: "", token: "", transactions: [], outputs: []};
+    this.state = {text: "", token: "", transactions: [], outputs: [], type: Camera.Constants.Type.back};
     AsyncStorage.getItem('token').then((token) => { this.getTransactions(token) } );
   }
+
+  _keyExtractor = (item, index) => item.id;
 
   calculateDateFromTimestamp(timestamp) {
     return new Date(timestamp * 1000).toString();
   }
 
-  async getTransactions(token) {
+  getTransactions(token) {
     const api = new WalletRestApi(token);
 
-    await AsyncStorage.getItem('outputs')
+    AsyncStorage.getItem('outputs')
     .then(value => {
       var outputs = JSON.parse(value);
       this.setState({ outputs: outputs });
@@ -96,10 +99,7 @@ export default class TransactionsDisplayComponent extends React.Component {
   }
 
   render() {
-    if (this.state.transactions == null) {
-      return <View style={styles.container} />
-    } else {
-      return (
+       return (
       <View style={styles.container}>
          <FlatList
            scrollEnabled={true}
@@ -109,12 +109,10 @@ export default class TransactionsDisplayComponent extends React.Component {
             isSpent={item.spent}
             outputValue={item.value / 100000000.0}
             transactionId={item.creationTx}
-            month={this.calculateMonthForTransaction(item.creationTx, this.state.transactions)}
-            day={this.calculateDayForTransaction(item.creationTx, this.state.transactions)}
+            keyExtractor={(item, index) => item.key}
           />}
          />
       </View>);
-    }
   }
 }
 

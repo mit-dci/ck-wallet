@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, AsyncStorage, Clipboard } from 'react-native';
+import { StyleSheet, Text, View, AsyncStorage, Clipboard, Alert } from 'react-native';
 import { APP_BACKGROUND_COLOR } from '../constants/styles';
 import LabelWithActionComponent from './LabelWithActionComponent';
 import QRCode from 'react-native-qrcode';
@@ -20,6 +20,18 @@ export default class QRCodeComponent extends React.Component {
     });
   }
 
+   copyHandler = () => {
+
+    Clipboard.setString(this.state.defaultKey);
+    Alert.alert(
+      'Public key copied',
+      'Your public key has been copied to your phone.',
+      [
+        {text: 'OK', onPress: () => console.log('OK Pressed')},
+      ],
+      { cancelable: false });
+  }
+
   render() {
     return (
       <View style={{flex: 0, justifyContent: 'center', alignItems: 'center'}}>
@@ -32,8 +44,9 @@ export default class QRCodeComponent extends React.Component {
         </View>
 
         <View style={{ marginTop: 30, }}>
-          <LabelWithActionComponent label={this.state.defaultKey} buttonImageSource={require("../assets/copy.png")}
-           onPressHandler={() => {Clipboard.setString(this.state.defaultKey)}}/>
+          <LabelWithActionComponent label={this.state.defaultKey}
+            buttonImageSource={require("../assets/copy.png")}
+           onPressHandler={this.copyHandler}/>
         </View>
       </View>
     );

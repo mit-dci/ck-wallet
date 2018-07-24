@@ -32,7 +32,7 @@ export default class WalletRestApi extends RestClient {
     return this.POST('/api/blockchain/util/gettransaction', {"id": id});
   }
 
-  postOutputs(id) {
+  postOutputs(outputs) {
     return this.POST('/api/blockchain/util/getoutputsetid', {"outputs": outputs});
   }
 

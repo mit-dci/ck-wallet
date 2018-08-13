@@ -4,7 +4,7 @@ var CryptoJS = require('crypto-js');
 
 export default class WalletRestApi extends RestClient {
   constructor(authToken) {
-    super('http://35.196.65.240:8080', {
+    super('http://35.227.19.97:8080', {
       headers: {
         'x-access-token': authToken,
       },
@@ -22,6 +22,10 @@ export default class WalletRestApi extends RestClient {
 
   getKeys(user_id) {
     return this.GET('/api/users/'+user_id+"/keys");
+  }
+
+  updateKeys(user_id, res) {
+    return this.POST('/api/users/'+user_id+"/keys", res);
   }
 
   getTxos(publicKey) {
